@@ -2,7 +2,7 @@
   <!-- navabr -->
   <Navbar />
   <!-- routes -->
-  <div class="container mt-8">
+  <div class="container mt-8 mb-5">
     <router-view />
   </div>
 </template>
