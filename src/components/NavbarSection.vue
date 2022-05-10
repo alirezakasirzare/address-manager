@@ -1,7 +1,6 @@
 <template>
   <nav
-    class="navbar navbar-expand-sm navbar-light fixed-top"
-    style="background-color: var(--bs-gray-200)"
+    class="navbar navbar-expand-sm navbar-light fixed-top border-bottom navbar-custom"
   >
     <div class="container-fluid">
       <!-- brand -->
@@ -31,3 +30,10 @@
     </div>
   </nav>
 </template>
+
+<style lang="scss" scoped>
+.navbar-custom {
+  background-color: var(--bs-gray-200);
+  border-color: var(--bs-gray-500) !important;
+}
+</style>
