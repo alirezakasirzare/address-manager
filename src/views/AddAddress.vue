@@ -3,7 +3,7 @@
   <h5 class="mb-4">اضافه کردن آدرس</h5>
 
   <!-- form -->
-  <div class="">
+  <div class="form">
     <div class="mb-3">
       <label for="form-fname" class="form-label">نام کوچک</label>
       <input
@@ -25,7 +25,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="input-mobile" class="form-mobile">تلفن همراه</label>
+      <label for="input-mobile" class="form-label">تلفن همراه</label>
       <input
         type="text"
         class="form-control"
@@ -35,7 +35,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="input-phone" class="form-phone">تلفن ثابت</label>
+      <label for="input-phone" class="form-label">تلفن ثابت</label>
       <input
         type="text"
         class="form-control"
@@ -46,8 +46,27 @@
 
     <div class="mb-3">
       <label for="input-address" class="form-label">آدرس دقیق</label>
-      <textarea class="form-control" id="input-address" placeholder="تهران ...">
-      </textarea>
+      <textarea
+        class="form-control form-address"
+        id="input-address"
+        placeholder="تهران ..."
+      ></textarea>
     </div>
+
+    <button class="btn btn-primary w-100 mb-2">اضافه کردن</button>
+    <router-link :to="{ name: 'home' }" class="btn btn-light w-100"
+      >برگشت به خانه</router-link
+    >
   </div>
 </template>
+
+<style lang="scss" scoped>
+.form {
+  max-width: 700px;
+  margin: auto;
+  &-address {
+    resize: none;
+    height: 150px;
+  }
+}
+</style>

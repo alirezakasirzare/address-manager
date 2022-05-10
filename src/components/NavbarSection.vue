@@ -1,10 +1,8 @@
 <template>
-  <nav
-    class="navbar navbar-expand-sm navbar-light fixed-top border-bottom navbar-custom"
-  >
+  <nav class="navbar navbar-expand-sm navbar-light fixed-top navbar-custom">
     <div class="container-fluid">
       <!-- brand -->
-      <router-link class="navbar-brand" to="/">
+      <router-link class="navbar-brand" :to="{ name: 'home' }">
         <span>آدرسـ</span>
         <span class="fw-bold">یت</span>
       </router-link>
@@ -23,10 +21,12 @@
       <div class="collapse navbar-collapse" id="navbar-menu">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link" to="/">خانه</router-link>
+            <router-link class="nav-link" :to="{ name: 'home' }"
+              >خانه</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/add"
+            <router-link class="nav-link" :to="{ name: 'add' }"
               >اضافه کردن آدرس</router-link
             >
           </li>
@@ -39,6 +39,5 @@
 <style lang="scss" scoped>
 .navbar-custom {
   background-color: var(--bs-gray-200);
-  border-color: var(--bs-gray-500) !important;
 }
 </style>
