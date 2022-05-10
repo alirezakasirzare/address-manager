@@ -24,23 +24,42 @@
 
 <script setup>
 import { ref } from '@vue/reactivity';
+import axios from 'axios';
 // components
 import ErrorPage from '@/components/ErrorPage.vue';
 import AddressCard from '@/components/AddressCard.vue';
 
+// axios
+//   .post(
+//     'https://stage.achareh.ir/api/karfarmas/address',
+//     {},
+//     {
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Authorization: 'Basic MDk4MjIyMjIyMjI6c2FuYTEyMzQ=',
+//       },
+//     }
+//   )
+//   .then(function (response) {
+//     console.log(response);
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
+
 // address items
 const itemsAddress = ref([
-  // {
-  //   id: '1234',
-  //   text: 'slam 1',
-  // },
-  // {
-  //   id: '123432',
-  //   text: 'slam 2',
-  // },
-  // {
-  //   id: '1234234',
-  //   text: 'slam 3',
-  // },
+  {
+    id: '1234',
+    text: 'slam 1',
+  },
+  {
+    id: '123432',
+    text: 'slam 2',
+  },
+  {
+    id: '1234234',
+    text: 'slam 3',
+  },
 ]);
 </script>
