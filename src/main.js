@@ -7,5 +7,8 @@ import store from './store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 
+// custom
+import './assets/style/main.scss';
+
 // app
 createApp(App).use(store).use(router).mount('#app');
