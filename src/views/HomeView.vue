@@ -26,34 +26,45 @@
     :to="{ name: 'add' }"
     v-if="itemsAddress.length"
     class="btn btn-primary position-fixed rounded-circle corner-button"
-    >+</router-link
   >
+    <i class="bi bi-plus"></i>
+  </router-link>
 </template>
 
 <script setup>
 import { ref } from '@vue/reactivity';
-// import axios from 'axios';
+import axios from 'axios';
 // components
 import ErrorPage from '@/components/ErrorPage.vue';
 import AddressCard from '@/components/AddressCard.vue';
 
-// axios
-//   .post(
-//     'https://stage.achareh.ir/api/karfarmas/address',
-//     {},
-//     {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: 'Basic MDk4MjIyMjIyMjI6c2FuYTEyMzQ=',
-//       },
-//     }
-//   )
-//   .then(function (response) {
-//     console.log(response);
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
+axios
+  .post(
+    'https://stage.achareh.ir/api/karfarmas/address',
+    {
+      first_name: 'Alireza',
+      last_name: 'Kasir',
+      coordinate_mobile: '092384723',
+      coordinate_phone_number: '03483274',
+      address: 'wdei fwoejf weojf',
+      region: 1,
+      lat: '35.7717503',
+      lng: '35.7717503',
+      gender: 'male',
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Basic MDk4MjIyMjIyMjI6c2FuYTEyMzQ=',
+      },
+    }
+  )
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
 // address items
 const itemsAddress = ref([
@@ -81,5 +92,7 @@ const itemsAddress = ref([
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
+  padding: 0 !important;
 }
 </style>

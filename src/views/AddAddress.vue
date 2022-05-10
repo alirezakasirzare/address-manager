@@ -53,7 +53,7 @@
       ></textarea>
     </div>
 
-    <button class="btn btn-primary w-100 mb-2">اضافه کردن</button>
+    <button class="btn btn-primary w-100 mb-2">مرحله بعد</button>
     <router-link :to="{ name: 'home' }" class="btn btn-light w-100"
       >برگشت به خانه</router-link
     >
