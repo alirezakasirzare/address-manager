@@ -24,7 +24,7 @@
 
 <script setup>
 import { ref } from '@vue/reactivity';
-import axios from 'axios';
+// import axios from 'axios';
 // components
 import ErrorPage from '@/components/ErrorPage.vue';
 import AddressCard from '@/components/AddressCard.vue';
