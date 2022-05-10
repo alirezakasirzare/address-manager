@@ -20,6 +20,14 @@
       linkText="اضافه کردن یک آدرس"
     />
   </dir>
+
+  <!-- corner button  -->
+  <router-link
+    :to="{ name: 'add' }"
+    v-if="itemsAddress.length"
+    class="btn btn-primary position-fixed rounded-circle corner-button"
+    >+</router-link
+  >
 </template>
 
 <script setup>
@@ -63,3 +71,15 @@ const itemsAddress = ref([
   },
 ]);
 </script>
+
+<style lang="scss" scoped>
+.corner-button {
+  bottom: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
