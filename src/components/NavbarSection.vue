@@ -1,5 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top">
+  <nav
+    class="navbar navbar-expand-sm navbar-light fixed-top"
+    style="background-color: var(--bs-gray-200)"
+  >
     <div class="container-fluid">
       <!-- brand -->
       <router-link class="navbar-brand" to="/">
