@@ -28,7 +28,7 @@
   <div class="form">
     <div class="tab-content">
       <div class="tab-pane fade show active" id="tab-form">
-        <form action="#">
+        <form action="#" ref="form" novalidate>
           <!-- title -->
           <strong class="mb-3 d-block border-start ps-2 border-3 border-info"
             >فرم</strong
@@ -36,27 +36,44 @@
 
           <!-- name input -->
           <div class="mb-3">
-            <label for="form-fname" class="form-label">نام کوچک</label>
+            <label for="form-fname" class="form-label">
+              <span>نام کوچک</span>
+              <span class="text-danger ms-1">*</span>
+            </label>
             <input
               type="text"
               class="form-control"
               id="form-fname"
+              required
+              minlength="3"
               placeholder="نام کوچک خود را وارد کنید"
             />
+            <div class="invalid-feedback">نام باید حداقل 3 حرف داشته باشد</div>
           </div>
 
           <div class="mb-3">
-            <label for="form-lname" class="form-label">نام خانوادگی</label>
+            <label for="form-lname" class="form-label">
+              <span>نام خانوادگی</span>
+              <span class="text-danger ms-1">*</span>
+            </label>
             <input
               type="text"
               class="form-control"
               id="form-lname"
               placeholder="نام خانوادگی خود را وارد کنید"
+              required
+              minlength="3"
             />
+            <div class="invalid-feedback">
+              نام خانوادگی باید حداقل 3 حرف داشته باشد
+            </div>
           </div>
 
           <div class="mb-3">
-            <label for="input-mobile" class="form-label">تلفن همراه</label>
+            <label for="input-mobile" class="form-label">
+              <span>تلفن همراه</span>
+              <span class="text-danger ms-1">*</span>
+            </label>
             <input
               type="text"
               class="form-control"
@@ -76,12 +93,20 @@
           </div>
 
           <div class="mb-3">
-            <label for="input-address" class="form-label">آدرس دقیق</label>
+            <label for="input-address" class="form-label">
+              <span>آدرس دقیق</span>
+              <span class="text-danger ms-1">*</span>
+            </label>
             <textarea
               class="form-control form-address"
               id="input-address"
               placeholder="تهران ..."
+              required
+              minlength="10"
             ></textarea>
+            <div class="invalid-feedback">
+              آدرس باید حداقل 10 حرف داشته باشد
+            </div>
           </div>
 
           <button class="btn btn-primary w-100 mb-2" type="submit">
@@ -114,13 +139,27 @@
 import { Tab } from 'bootstrap/dist/js/bootstrap';
 import { ref, onMounted } from 'vue';
 
+// elements
 const tabOne = ref(null);
 const tabTwo = ref(null);
+const form = ref(null);
 
+// variales
 const validatedForm = ref(false);
 
-// handel click to bootstrap tab
 onMounted(() => {
+  // validated
+  form.value.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!form.value.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    form.value.classList.add('was-validated');
+  });
+  // handel click to bootstrap tab
+
   [tabOne.value, tabTwo.value].forEach(function (triggerEl) {
     const tabTrigger = new Tab(triggerEl);
 
