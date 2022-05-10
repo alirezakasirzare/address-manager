@@ -5,8 +5,10 @@
     <div class="container-fluid">
       <!-- brand -->
       <router-link class="navbar-brand" to="/">
-        <span class="fw-bold">AD</span> manager</router-link
-      >
+        <span>آدرس</span>
+        <span class="fw-bold">یت</span>
+      </router-link>
+
       <!-- toggle mobile menu -->
       <button
         class="navbar-toggler"
@@ -16,14 +18,17 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <!-- menu -->
       <div class="collapse navbar-collapse" id="navbar-menu">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link" to="/">Home</router-link>
+            <router-link class="nav-link" to="/">خانه</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/add">Add address</router-link>
+            <router-link class="nav-link" to="/add"
+              >اضافه کردن آدرس</router-link
+            >
           </li>
         </ul>
       </div>
