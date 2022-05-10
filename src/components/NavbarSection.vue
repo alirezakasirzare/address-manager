@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <!-- brand -->
       <router-link class="navbar-brand" to="/">
-        <span>آدرس</span>
+        <span>آدرسـ</span>
         <span class="fw-bold">یت</span>
       </router-link>
 
