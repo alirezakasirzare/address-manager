@@ -42,29 +42,13 @@ import AddressCard from '@/components/AddressCard.vue';
 const itemsAddress = ref([]);
 
 axios
-  .post(
-    'https://stage.achareh.ir/api/karfarmas/address',
-    {
-      // first_name: 'Alireza',
-      // last_name: 'Kasir',
-      // coordinate_mobile: '092384723',
-      // coordinate_phone_number: '03483274',
-      // address: 'wdei fwoejf weojf',
-      // region: 1,
-      // lat: '35.7717503',
-      // lng: '35.7717503',
-      // gender: 'male',
+  .get('https://stage.achareh.ir/api/karfarmas/address', {
+    headers: {
+      Authorization: 'Basic MDk4MjIyMjIyMjI6U2FuYTEyMzQ1Ng==',
     },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Basic MDk4MjIyMjIyMjI6U2FuYTEyMzQ1Ng==',
-      },
-    }
-  )
+  })
   .then((response) => {
-    console.log(response);
-    itemsAddress.value.push(response.data);
+    itemsAddress.value = response.data;
   })
   .catch((error) => {
     console.log(error);

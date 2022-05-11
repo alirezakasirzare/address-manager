@@ -153,7 +153,7 @@
             </div>
           </div>
 
-          <button class="btn btn-primary w-100 mb-2" type="submit">
+          <button class="btn btn-primary w-100 mb-3" type="submit">
             مرحله بعد
           </button>
           <router-link :to="{ name: 'home' }" class="btn btn-light w-100"
@@ -169,6 +169,10 @@
           >نقشه</strong
         >
         <MapForm @changeMap="onChangeMap" />
+
+        <button class="btn btn-primary w-100 mt-2" @click="onAddAddress">
+          افزودن آدرس
+        </button>
       </div>
     </div>
   </div>
@@ -178,6 +182,7 @@
 import MapForm from '@/components/MapForm.vue';
 import { Tab } from 'bootstrap/dist/js/bootstrap';
 import { ref, onMounted, reactive } from 'vue';
+import axios from 'axios';
 
 const formData = reactive({
   first_name: '',
@@ -250,6 +255,22 @@ onMounted(() => {
     });
   });
 });
+
+const onAddAddress = () => {
+  axios
+    .post('https://stage.achareh.ir/api/karfarmas/address', formData, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Basic MDk4MjIyMjIyMjI6U2FuYTEyMzQ1Ng==',
+      },
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 </script>
 
 <style lang="scss" scoped>
