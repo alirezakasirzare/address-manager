@@ -27,7 +27,7 @@
     v-if="itemsAddress.length"
     class="btn btn-primary position-fixed rounded-circle corner-button"
   >
-    <i class="bi bi-plus"></i>
+    +
   </router-link>
 </template>
 
