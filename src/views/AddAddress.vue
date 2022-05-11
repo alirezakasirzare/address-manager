@@ -47,6 +47,7 @@
               required
               minlength="3"
               placeholder="نام کوچک خود را وارد کنید"
+              v-model="formData.first_name"
             />
             <div class="invalid-feedback">نام باید حداقل 3 حرف داشته باشد</div>
           </div>
@@ -63,6 +64,7 @@
               placeholder="نام خانوادگی خود را وارد کنید"
               required
               minlength="3"
+              v-model="formData.last_name"
             />
             <div class="invalid-feedback">
               نام خانوادگی باید حداقل 3 حرف داشته باشد
@@ -82,6 +84,7 @@
               required
               ref="formMobile"
               pattern="09(0[1-2]|1[0-9]|3[0-9]|2[0-1])-?[0-9]{3}-?[0-9]{4}"
+              v-model="formData.coordinate_mobile"
             />
             <div class="invalid-feedback">فرمت شماره موبایل اشتباه است</div>
           </div>
@@ -95,6 +98,7 @@
               placeholder="0210000000"
               ref="formPhone"
               pattern="^0[0-9]{2,}[0-9]{7,}$"
+              v-model="formData.coordinate_phone_number"
             />
           </div>
 
@@ -109,9 +113,43 @@
               placeholder="تهران ..."
               required
               minlength="10"
+              v-model="formData.address"
             ></textarea>
             <div class="invalid-feedback">
               آدرس باید حداقل 10 حرف داشته باشد
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center mb-3">
+            <label class="me-2">
+              <span>جنسیت</span>
+              <span class="text-danger ms-1">*</span>
+            </label>
+            <div class="btn-group">
+              <input
+                type="radio"
+                class="btn-check"
+                id="form-male"
+                autocomplete="off"
+                checked
+                v-model="formData.gender"
+                value="male"
+              />
+              <label class="btn btn-outline-secondary" for="form-male"
+                >مرد</label
+              >
+
+              <input
+                type="radio"
+                class="btn-check"
+                id="form-female"
+                autocomplete="off"
+                v-model="formData.gender"
+                value="female"
+              />
+              <label class="btn btn-outline-secondary" for="form-female"
+                >زن</label
+              >
             </div>
           </div>
 
@@ -139,7 +177,19 @@
 <script setup>
 import MapForm from '@/components/MapForm.vue';
 import { Tab } from 'bootstrap/dist/js/bootstrap';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, reactive } from 'vue';
+
+const formData = reactive({
+  first_name: '',
+  last_name: '',
+  coordinate_mobile: '',
+  coordinate_phone_number: '',
+  address: '',
+  region: 1,
+  lat: '35.7219',
+  lng: '51.3347',
+  gender: 'male',
+});
 
 // elements
 const tabOne = ref(null);
@@ -149,7 +199,8 @@ const formMobile = ref(null);
 const formPhone = ref(null);
 
 const onChangeMap = (e) => {
-  console.log(e);
+  formData.lat = e.lat;
+  formData.lng = e.lng;
 };
 
 onMounted(() => {
@@ -191,7 +242,7 @@ onMounted(() => {
     triggerEl.addEventListener('click', function (event) {
       event.preventDefault();
       event.stopPropagation();
-      if (tabTwo.value === triggerEl && form.value.checkValidity()) {
+      if (tabTwo.value === triggerEl && !form.value.checkValidity()) {
         // show toast
       } else {
         tabTrigger.show();
