@@ -33,54 +33,42 @@
 
 <script setup>
 import { ref } from '@vue/reactivity';
-// import axios from 'axios';
+import axios from 'axios';
 // components
 import ErrorPage from '@/components/ErrorPage.vue';
 import AddressCard from '@/components/AddressCard.vue';
 
-// axios
-//   .post(
-//     'https://stage.achareh.ir/api/karfarmas/address',
-//     {
-//       first_name: 'Alireza',
-//       last_name: 'Kasir',
-//       coordinate_mobile: '092384723',
-//       coordinate_phone_number: '03483274',
-//       address: 'wdei fwoejf weojf',
-//       region: 1,
-//       lat: '35.7717503',
-//       lng: '35.7717503',
-//       gender: 'male',
-//     },
-//     {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: 'Basic MDk4MjIyMjIyMjI6c2FuYTEyMzQ=',
-//       },
-//     }
-//   )
-//   .then(function (response) {
-//     console.log(response);
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
-
 // address items
-const itemsAddress = ref([
-  {
-    id: '1234',
-    text: 'slam 1',
-  },
-  {
-    id: '123432',
-    text: 'slam 2',
-  },
-  {
-    id: '1234234',
-    text: 'slam 3',
-  },
-]);
+const itemsAddress = ref([]);
+
+axios
+  .post(
+    'https://stage.achareh.ir/api/karfarmas/address',
+    {
+      // first_name: 'Alireza',
+      // last_name: 'Kasir',
+      // coordinate_mobile: '092384723',
+      // coordinate_phone_number: '03483274',
+      // address: 'wdei fwoejf weojf',
+      // region: 1,
+      // lat: '35.7717503',
+      // lng: '35.7717503',
+      // gender: 'male',
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Basic MDk4MjIyMjIyMjI6U2FuYTEyMzQ1Ng==',
+      },
+    }
+  )
+  .then((response) => {
+    console.log(response);
+    itemsAddress.value.push(response.data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 </script>
 
 <style lang="scss" scoped>
