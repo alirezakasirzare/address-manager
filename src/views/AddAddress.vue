@@ -124,18 +124,14 @@
         <strong class="mb-3 d-block border-start ps-2 border-3 border-info"
           >نقشه</strong
         >
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur
-          error rem labore, dolore, sequi molestias quod ipsum asperiores
-          dolorum magni excepturi et. Laborum, ad enim inventore sit numquam
-          placeat ullam.
-        </p>
+        <MapForm />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import MapForm from '@/components/MapForm.vue';
 import { Tab } from 'bootstrap/dist/js/bootstrap';
 import { ref, onMounted } from 'vue';
 
@@ -145,7 +141,7 @@ const tabTwo = ref(null);
 const form = ref(null);
 
 // variales
-const validatedForm = ref(false);
+const validatedForm = ref(true);
 
 onMounted(() => {
   // validated
