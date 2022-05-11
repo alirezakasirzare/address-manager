@@ -76,19 +76,25 @@
             </label>
             <input
               type="text"
-              class="form-control"
+              class="form-control form-phone"
               id="input-mobile"
-              placeholder="0916 000 0000"
+              placeholder="09160000000"
+              required
+              ref="formMobile"
+              pattern="09(0[1-2]|1[0-9]|3[0-9]|2[0-1])-?[0-9]{3}-?[0-9]{4}"
             />
+            <div class="invalid-feedback">فرمت شماره موبایل اشتباه است</div>
           </div>
 
           <div class="mb-3">
             <label for="input-phone" class="form-label">تلفن ثابت</label>
             <input
               type="text"
-              class="form-control"
+              class="form-control form-phone"
               id="input-phone"
               placeholder="0916 000 0000"
+              ref="formPhone"
+              pattern="^0[0-9]{2,}[0-9]{7,}$"
             />
           </div>
 
@@ -139,20 +145,39 @@ import { ref, onMounted } from 'vue';
 const tabOne = ref(null);
 const tabTwo = ref(null);
 const form = ref(null);
-
-// variales
-const validatedForm = ref(true);
+const formMobile = ref(null);
+const formPhone = ref(null);
 
 onMounted(() => {
-  // validated
+  // input phone
+  [formMobile.value, formPhone.value].forEach((item) => {
+    item.addEventListener('keydown', (event) => {
+      const keyOfButton = event.keyCode || event.which;
+      let key = null;
+
+      // Handle paste
+      if (event.type === 'paste') {
+        key = event.clipboardData.getData('text/plain');
+      } else {
+        // Handle key press
+        key = String.fromCharCode(keyOfButton);
+      }
+
+      const regex = /[0-9]|\./;
+
+      if (!regex.test(key) && keyOfButton != 8) {
+        event.returnValue = false;
+        if (event.preventDefault) event.preventDefault();
+      }
+    });
+  });
+  // validated form
   form.value.addEventListener('submit', (event) => {
     event.preventDefault();
-    if (!form.value.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
     form.value.classList.add('was-validated');
+    if (form.value.checkValidity()) {
+      tabTwo.value.click();
+    }
   });
   // handel click to bootstrap tab
 
@@ -162,7 +187,7 @@ onMounted(() => {
     triggerEl.addEventListener('click', function (event) {
       event.preventDefault();
       event.stopPropagation();
-      if (tabTwo.value === triggerEl && !validatedForm.value) {
+      if (tabTwo.value === triggerEl && !form.value.checkValidity()) {
         // show toast
       } else {
         tabTrigger.show();
@@ -179,6 +204,10 @@ onMounted(() => {
   &-address {
     resize: none;
     height: 150px;
+  }
+
+  &-phone {
+    direction: ltr;
   }
 }
 </style>
