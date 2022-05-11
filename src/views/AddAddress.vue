@@ -193,7 +193,7 @@
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">نتیجه درخواست</h5>
           </div>
-          <div class="modal-body">آدرس به موفقیت اضافه شد</div>
+          <div class="modal-body">آدرس با موفقیت اضافه شد</div>
           <div class="modal-footer">
             <router-link
               type="button"
