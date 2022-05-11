@@ -92,7 +92,7 @@
               type="text"
               class="form-control form-phone"
               id="input-phone"
-              placeholder="0916 000 0000"
+              placeholder="0210000000"
               ref="formPhone"
               pattern="^0[0-9]{2,}[0-9]{7,}$"
             />
@@ -187,7 +187,7 @@ onMounted(() => {
     triggerEl.addEventListener('click', function (event) {
       event.preventDefault();
       event.stopPropagation();
-      if (tabTwo.value === triggerEl && !form.value.checkValidity()) {
+      if (tabTwo.value === triggerEl && form.value.checkValidity()) {
         // show toast
       } else {
         tabTrigger.show();
