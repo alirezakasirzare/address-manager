@@ -6,18 +6,21 @@
     <div v-if="lodingData">
       <LoadingSection />
     </div>
-    <div
-      class="row g-3 justify-content-center"
-      v-if="itemsAddress.length && !lodingData"
-    >
+
+    <transition name="fade">
       <div
-        class="col-12 col-md-6 col-lg-4"
-        v-for="item in itemsAddress"
-        :key="item.id"
+        class="row g-3 justify-content-center"
+        v-if="itemsAddress.length && !lodingData"
       >
-        <AddressCard :item="item" @moreInfo="onMoreInfo" />
+        <div
+          class="col-12 col-md-6 col-lg-4"
+          v-for="item in itemsAddress"
+          :key="item.id"
+        >
+          <AddressCard :item="item" @moreInfo="onMoreInfo" />
+        </div>
       </div>
-    </div>
+    </transition>
     <!-- not found item -->
     <dir class="p-0 pt-5" v-if="!itemsAddress.length && !lodingData">
       <ErrorPage
@@ -86,5 +89,15 @@ axios
   align-items: center;
   font-size: 20px;
   padding: 0 !important;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(50px);
 }
 </style>

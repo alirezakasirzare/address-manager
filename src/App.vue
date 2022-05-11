@@ -14,15 +14,3 @@
 <script setup>
 import Navbar from './components/NavbarSection.vue';
 </script>
-
-<style lang="scss" scoped>
-.fade-enter-active {
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-  transform: translateY(20px);
-}
-</style>

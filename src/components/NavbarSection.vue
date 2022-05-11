@@ -40,4 +40,8 @@
 .navbar-custom {
   background-color: var(--bs-gray-200);
 }
+
+.router-link-exact-active {
+  color: #000 !important;
+}
 </style>
