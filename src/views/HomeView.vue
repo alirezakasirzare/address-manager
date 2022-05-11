@@ -1,42 +1,44 @@
 <template>
-  <!-- title -->
-  <h5 class="mb-4">لیست آدرس ها</h5>
-  <!-- address lists -->
-  <div v-if="lodingData">
-    <LoadingSection />
-  </div>
-  <div
-    class="row g-3 justify-content-center"
-    v-if="itemsAddress.length && !lodingData"
-  >
-    <div
-      class="col-12 col-md-6 col-lg-4"
-      v-for="item in itemsAddress"
-      :key="item.id"
-    >
-      <AddressCard :item="item" @moreInfo="onMoreInfo" />
+  <div>
+    <!-- title -->
+    <h5 class="mb-4">لیست آدرس ها</h5>
+    <!-- address lists -->
+    <div v-if="lodingData">
+      <LoadingSection />
     </div>
+    <div
+      class="row g-3 justify-content-center"
+      v-if="itemsAddress.length && !lodingData"
+    >
+      <div
+        class="col-12 col-md-6 col-lg-4"
+        v-for="item in itemsAddress"
+        :key="item.id"
+      >
+        <AddressCard :item="item" @moreInfo="onMoreInfo" />
+      </div>
+    </div>
+    <!-- not found item -->
+    <dir class="p-0 pt-5" v-if="!itemsAddress.length && !lodingData">
+      <ErrorPage
+        text="هیچ آدرسی یافت نشد"
+        image-url="no-item.svg"
+        linkTarget="/add"
+        linkText="اضافه کردن یک آدرس"
+      />
+    </dir>
+
+    <!-- corner button  -->
+    <router-link
+      :to="{ name: 'add' }"
+      v-if="itemsAddress.length"
+      class="btn btn-primary position-fixed rounded-circle corner-button"
+    >
+      +
+    </router-link>
+
+    <MoreInfoModal :current-item="currentItem" />
   </div>
-  <!-- not found item -->
-  <dir class="p-0 pt-5" v-if="!itemsAddress.length && !lodingData">
-    <ErrorPage
-      text="هیچ آدرسی یافت نشد"
-      image-url="no-item.svg"
-      linkTarget="/add"
-      linkText="اضافه کردن یک آدرس"
-    />
-  </dir>
-
-  <!-- corner button  -->
-  <router-link
-    :to="{ name: 'add' }"
-    v-if="itemsAddress.length"
-    class="btn btn-primary position-fixed rounded-circle corner-button"
-  >
-    +
-  </router-link>
-
-  <MoreInfoModal :current-item="currentItem" />
 </template>
 
 <script setup>
