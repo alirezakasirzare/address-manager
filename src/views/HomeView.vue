@@ -14,7 +14,7 @@
       v-for="item in itemsAddress"
       :key="item.id"
     >
-      <AddressCard :item="item" />
+      <AddressCard :item="item" @moreInfo="onMoreInfo" />
     </div>
   </div>
   <!-- not found item -->
@@ -35,19 +35,28 @@
   >
     +
   </router-link>
+
+  <MoreInfoModal :current-item="currentItem" />
 </template>
 
 <script setup>
-import { ref } from '@vue/reactivity';
+import { reactive, ref } from '@vue/reactivity';
 import axios from 'axios';
 // components
 import ErrorPage from '@/components/ErrorPage.vue';
 import AddressCard from '@/components/AddressCard.vue';
 import LoadingSection from '@/components/LoadingSection.vue';
+import MoreInfoModal from '@/components/MoreInfoModal.vue';
 
 // address items
 const itemsAddress = ref([]);
 const lodingData = ref(true);
+
+const currentItem = reactive({});
+
+const onMoreInfo = (event) => {
+  Object.assign(currentItem, event);
+};
 
 axios
   .get('https://stage.achareh.ir/api/karfarmas/address', {
