@@ -130,7 +130,7 @@
         <strong class="mb-3 d-block border-start ps-2 border-3 border-info"
           >نقشه</strong
         >
-        <MapForm />
+        <MapForm @changeMap="onChangeMap" />
       </div>
     </div>
   </div>
@@ -147,6 +147,10 @@ const tabTwo = ref(null);
 const form = ref(null);
 const formMobile = ref(null);
 const formPhone = ref(null);
+
+const onChangeMap = (e) => {
+  console.log(e);
+};
 
 onMounted(() => {
   // input phone

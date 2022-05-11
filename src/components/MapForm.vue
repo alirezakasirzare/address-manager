@@ -8,14 +8,15 @@
   >
     <Marker :options="{ position: { lat: markerLat, lng: markerLng } }" />
   </GoogleMap>
-  {{ markerLat }},
-  {{ markerLng }}
 </template>
 
 <script setup>
 import { ref } from '@vue/reactivity';
 import { onMounted } from '@vue/runtime-core';
 import { GoogleMap, Marker } from 'vue3-google-map';
+import { defineEmits } from 'vue';
+
+const emit = defineEmits(['changeMap']);
 
 const markerLat = ref(35.7219);
 const markerLng = ref(51.3347);
@@ -23,6 +24,8 @@ const markerLng = ref(51.3347);
 const updateCoordinates = (e) => {
   markerLat.value = e.latLng.lat();
   markerLng.value = e.latLng.lng();
+
+  emit('changeMap', { lat: markerLat.value, lng: markerLng.value });
 };
 
 onMounted(() => {});
