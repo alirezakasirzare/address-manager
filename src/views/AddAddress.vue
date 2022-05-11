@@ -170,9 +170,42 @@
         >
         <MapForm @changeMap="onChangeMap" />
 
-        <button class="btn btn-primary w-100 mt-2" @click="onAddAddress">
-          افزودن آدرس
+        <button
+          class="btn btn-primary w-100 mt-2"
+          @click="onAddAddress"
+          :disabled="loading"
+        >
+          <span v-if="!loading">افزودن آدرس</span>
+          <span class="spinner-border spinner-border-sm" v-else></span>
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" tabindex="-1" ref="modal">
+    <div class="modal-dialog modal-dialog-centered">
+      ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">نتیجه درخواست</h5>
+        </div>
+        <div class="modal-body">آدرس به موفقیت اضافه شد</div>
+        <div class="modal-footer">
+          <router-link
+            type="button"
+            class="btn btn-light"
+            :to="{ name: 'home' }"
+            >بازگشت به خانه</router-link
+          >
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="addAddressAgain"
+          >
+            اضافه کردن آدرس جدید
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -180,11 +213,14 @@
 
 <script setup>
 import MapForm from '@/components/MapForm.vue';
-import { Tab } from 'bootstrap/dist/js/bootstrap';
-import { ref, onMounted, reactive } from 'vue';
+// import router from '@/router';
+import { Tab, Modal } from 'bootstrap/dist/js/bootstrap';
+import { ref, onMounted, reactive, onUnmounted } from 'vue';
 import axios from 'axios';
 
-const formData = reactive({
+const loading = ref(false);
+
+const initFormData = () => ({
   first_name: '',
   last_name: '',
   coordinate_mobile: '',
@@ -196,13 +232,16 @@ const formData = reactive({
   gender: 'male',
 });
 
+const formData = reactive(initFormData());
+
 // elements
 const tabOne = ref(null);
 const tabTwo = ref(null);
 const form = ref(null);
 const formMobile = ref(null);
 const formPhone = ref(null);
-
+const modal = ref(null);
+let myModal = '';
 const onChangeMap = (e) => {
   formData.lat = e.lat;
   formData.lng = e.lng;
@@ -248,29 +287,51 @@ onMounted(() => {
       event.preventDefault();
       event.stopPropagation();
       if (tabTwo.value === triggerEl && !form.value.checkValidity()) {
-        // show toast
+        form.value.classList.add('was-validated');
       } else {
         tabTrigger.show();
       }
     });
   });
+
+  // handel modal
+  myModal = new Modal(modal.value, {
+    backdrop: 'static',
+    keyboard: false,
+  });
 });
 
 const onAddAddress = () => {
-  axios
-    .post('https://stage.achareh.ir/api/karfarmas/address', formData, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Basic MDk4MjIyMjIyMjI6U2FuYTEyMzQ1Ng==',
-      },
-    })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  if (!loading.value) {
+    loading.value = true;
+    axios
+      .post('https://stage.achareh.ir/api/karfarmas/address', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Basic MDk4MjIyMjIyMjI6U2FuYTEyMzQ1Ng==',
+        },
+      })
+      .then(() => {
+        loading.value = false;
+        myModal.show();
+      })
+      .catch((error) => {
+        loading.value = false;
+        console.log(error);
+      });
+  }
 };
+
+const addAddressAgain = () => {
+  myModal.hide();
+  tabOne.value.click();
+  Object.assign(formData, initFormData());
+  form.value.classList.remove('was-validated');
+};
+
+onUnmounted(() => {
+  myModal.hide();
+});
 </script>
 
 <style lang="scss" scoped>
