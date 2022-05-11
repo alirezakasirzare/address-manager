@@ -2,7 +2,13 @@
   <!-- title -->
   <h5 class="mb-4">لیست آدرس ها</h5>
   <!-- address lists -->
-  <div class="row g-3 justify-content-center" v-if="itemsAddress.length">
+  <div v-if="lodingData">
+    <LoadingSection />
+  </div>
+  <div
+    class="row g-3 justify-content-center"
+    v-if="itemsAddress.length && !lodingData"
+  >
     <div
       class="col-12 col-md-6 col-lg-4"
       v-for="item in itemsAddress"
@@ -12,7 +18,7 @@
     </div>
   </div>
   <!-- not found item -->
-  <dir class="p-0 pt-5" v-else>
+  <dir class="p-0 pt-5" v-if="!itemsAddress.length && !lodingData">
     <ErrorPage
       text="هیچ آدرسی یافت نشد"
       image-url="no-item.svg"
@@ -37,9 +43,11 @@ import axios from 'axios';
 // components
 import ErrorPage from '@/components/ErrorPage.vue';
 import AddressCard from '@/components/AddressCard.vue';
+import LoadingSection from '@/components/LoadingSection.vue';
 
 // address items
 const itemsAddress = ref([]);
+const lodingData = ref(true);
 
 axios
   .get('https://stage.achareh.ir/api/karfarmas/address', {
@@ -49,9 +57,10 @@ axios
   })
   .then((response) => {
     itemsAddress.value = response.data;
+    lodingData.value = false;
   })
-  .catch((error) => {
-    console.log(error);
+  .catch(() => {
+    lodingData.value = false;
   });
 </script>
 
