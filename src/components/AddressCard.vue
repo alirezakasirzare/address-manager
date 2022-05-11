@@ -6,8 +6,12 @@
         {{ props.item.first_name }}
         {{ props.item.last_name }}
       </h5>
-      <p class="card-text mb-0 text-secondary">lat : {{ props.item.lat }}</p>
-      <p class="card-text mb-0 text-secondary">lng : {{ props.item.lng }}</p>
+      <p class="card-text mb-0 text-secondary">
+        طول جغرافیایی : {{ props.item.lng }}
+      </p>
+      <p class="card-text mb-0 text-secondary">
+        عرض جفرافیایی : {{ props.item.lat }}
+      </p>
     </div>
     <div>
       <button
