@@ -11,15 +11,15 @@
 </template>
 
 <script setup>
-import { ref } from '@vue/reactivity';
-import { onMounted } from '@vue/runtime-core';
+import { defineEmits, ref } from 'vue';
 import { GoogleMap, Marker } from 'vue3-google-map';
-import { defineEmits } from 'vue';
 
-const emit = defineEmits(['changeMap']);
-
+// location
 const markerLat = ref(35.7219);
 const markerLng = ref(51.3347);
+
+// send event change map to parent
+const emit = defineEmits(['changeMap']);
 
 const updateCoordinates = (e) => {
   markerLat.value = e.latLng.lat();
@@ -27,6 +27,4 @@ const updateCoordinates = (e) => {
 
   emit('changeMap', { lat: markerLat.value, lng: markerLng.value });
 };
-
-onMounted(() => {});
 </script>

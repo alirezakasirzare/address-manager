@@ -3,9 +3,9 @@
     <!-- title -->
     <h5 class="mb-4">اضافه کردن آدرس</h5>
 
-    <!-- tabs -->
+    <!-- nav tabs -->
     <nav class="mb-4 mb-md-5">
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <div class="nav nav-tabs">
         <button
           class="nav-link active tab-trigger"
           id="nav-home-tab"
@@ -55,6 +55,7 @@
               </div>
             </div>
 
+            <!-- last name input -->
             <div class="mb-3">
               <label for="form-lname" class="form-label">
                 <span>نام خانوادگی</span>
@@ -74,6 +75,7 @@
               </div>
             </div>
 
+            <!-- mobile input -->
             <div class="mb-3">
               <label for="input-mobile" class="form-label">
                 <span>تلفن همراه</span>
@@ -92,6 +94,7 @@
               <div class="invalid-feedback">فرمت شماره موبایل اشتباه است</div>
             </div>
 
+            <!-- phone input -->
             <div class="mb-3">
               <label for="input-phone" class="form-label">تلفن ثابت</label>
               <input
@@ -105,6 +108,7 @@
               />
             </div>
 
+            <!-- address input -->
             <div class="mb-3">
               <label for="input-address" class="form-label">
                 <span>آدرس دقیق</span>
@@ -123,6 +127,7 @@
               </div>
             </div>
 
+            <!-- gender input -->
             <div class="d-flex align-items-center mb-3">
               <label class="me-2">
                 <span>جنسیت</span>
@@ -156,6 +161,7 @@
               </div>
             </div>
 
+            <!-- buttons after form -->
             <button class="btn btn-primary w-100 mb-3" type="submit">
               مرحله بعد
             </button>
@@ -171,10 +177,14 @@
           <strong class="mb-3 d-block border-start ps-2 border-3 border-info"
             >نقشه</strong
           >
+
+          <!-- google map -->
           <MapForm @changeMap="onChangeMap" />
 
+          <!-- button after map -->
           <button
             class="btn btn-primary w-100 mt-2"
+            type="button"
             @click="onAddAddress"
             :disabled="loading"
           >
@@ -190,10 +200,15 @@
       <div class="modal-dialog modal-dialog-centered">
         ">
         <div class="modal-content">
+          <!-- header -->
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">نتیجه درخواست</h5>
+            <h5 class="modal-title">نتیجه درخواست</h5>
           </div>
+
+          <!-- body -->
           <div class="modal-body">آدرس با موفقیت اضافه شد</div>
+
+          <!-- footer -->
           <div class="modal-footer">
             <router-link
               type="button"
@@ -216,14 +231,14 @@
 </template>
 
 <script setup>
-import MapForm from '@/components/MapForm.vue';
-// import router from '@/router';
 import { Tab, Modal } from 'bootstrap/dist/js/bootstrap';
 import { ref, onMounted, reactive, onUnmounted } from 'vue';
 import axios from 'axios';
 
-const loading = ref(false);
+// components
+import MapForm from '@/components/MapForm.vue';
 
+// form data
 const initFormData = () => ({
   first_name: '',
   last_name: '',
@@ -236,6 +251,11 @@ const initFormData = () => ({
   gender: 'male',
 });
 
+const onChangeMap = (e) => {
+  formData.lat = e.lat;
+  formData.lng = e.lng;
+};
+
 const formData = reactive(initFormData());
 
 // elements
@@ -246,23 +266,17 @@ const formMobile = ref(null);
 const formPhone = ref(null);
 const modal = ref(null);
 let myModal = '';
-const onChangeMap = (e) => {
-  formData.lat = e.lat;
-  formData.lng = e.lng;
-};
 
 onMounted(() => {
-  // input phone
+  // handel input phone and mobile dont accept text
   [formMobile.value, formPhone.value].forEach((item) => {
     item.addEventListener('keydown', (event) => {
       const keyOfButton = event.keyCode || event.which;
       let key = null;
 
-      // Handle paste
       if (event.type === 'paste') {
         key = event.clipboardData.getData('text/plain');
       } else {
-        // Handle key press
         key = String.fromCharCode(keyOfButton);
       }
 
@@ -274,6 +288,7 @@ onMounted(() => {
       }
     });
   });
+
   // validated form
   form.value.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -282,8 +297,8 @@ onMounted(() => {
       tabTwo.value.click();
     }
   });
-  // handel click to bootstrap tab
 
+  // handel click to bootstrap tabs
   [tabOne.value, tabTwo.value].forEach(function (triggerEl) {
     const tabTrigger = new Tab(triggerEl);
 
@@ -304,6 +319,9 @@ onMounted(() => {
     keyboard: false,
   });
 });
+
+// add address clicked
+const loading = ref(false);
 
 const onAddAddress = () => {
   if (!loading.value) {
@@ -326,6 +344,7 @@ const onAddAddress = () => {
   }
 };
 
+// add address again methode
 const addAddressAgain = () => {
   myModal.hide();
   tabOne.value.click();
