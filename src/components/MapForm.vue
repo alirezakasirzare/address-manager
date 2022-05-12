@@ -1,7 +1,7 @@
 <template>
   <GoogleMap
-    api-key="AIzaSyDlXA2zNV947LHZ38z3J_cPH6gi30mi9Fc"
-    style="width: 100%; height: 500px"
+    api-key="AIzaSyA3zLUIo8ZipYbIzRnsQGFKloVyQhZrDtI"
+    class="map"
     :center="{ lat: markerLat, lng: markerLng }"
     :zoom="15"
     @click="updateCoordinates"
@@ -28,3 +28,10 @@ const updateCoordinates = (e) => {
   emit('changeMap', { lat: markerLat.value, lng: markerLng.value });
 };
 </script>
+
+<style lang="scss" scoped>
+.map {
+  width: 100%;
+  height: 500px;
+}
+</style>

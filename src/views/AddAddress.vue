@@ -178,12 +178,17 @@
             >نقشه</strong
           >
 
+          <!-- info -->
+          <div class="alert alert-warning mb-2">
+            روی آدرس خود در نقشه کلیک کنید .
+          </div>
+
           <!-- google map -->
           <MapForm @changeMap="onChangeMap" />
 
           <!-- button after map -->
           <button
-            class="btn btn-primary w-100 mt-2"
+            class="btn btn-primary w-100 mt-3"
             type="button"
             @click="onAddAddress"
             :disabled="loading"
