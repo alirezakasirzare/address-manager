@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 // views
-import HomeView from '../views/HomeView.vue';
+import HomePage from '../views/HomePage.vue';
 import AddAddress from '../views/AddAddress.vue';
 
 // routes
@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView,
+    component: HomePage,
   },
   {
     path: '/add',
