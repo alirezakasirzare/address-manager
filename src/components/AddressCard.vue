@@ -1,6 +1,9 @@
 <template>
   <div class="card overflow-hidden">
+    <!-- header card -->
     <h5 class="card-header">آدرس ۱</h5>
+
+    <!-- body card -->
     <div class="card-body text-center">
       <h5 class="card-title">
         {{ props.item.first_name }}
@@ -13,6 +16,8 @@
         عرض جفرافیایی : {{ props.item.lat }}
       </p>
     </div>
+
+    <!-- show more button -->
     <div>
       <button
         class="btn btn-primary d-block w-100 rounded-0"
@@ -26,6 +31,7 @@
 
 <script setup>
 import { defineProps } from 'vue';
-// props
+
+// item data
 const props = defineProps(['item']);
 </script>
