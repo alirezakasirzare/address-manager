@@ -36,6 +36,9 @@
       :to="{ name: 'add' }"
       v-if="itemsAddress.length"
       class="btn btn-primary position-fixed rounded-circle corner-button"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="اضافه کردن آدرس"
     >
       +
     </router-link>
@@ -60,7 +63,8 @@ const lodingData = ref(true);
 const currentItem = reactive({});
 
 const onMoreInfo = (event) => {
-  Object.assign(currentItem, event);
+  const modalId = Math.random();
+  Object.assign(currentItem, { ...event, modalId });
 };
 
 axios
