@@ -19,7 +19,8 @@
 
 <script setup>
 import { defineProps } from 'vue';
-// props
+
+// error data
 const props = defineProps(['text', 'image-url', 'link-text', 'link-target']);
 </script>
 
