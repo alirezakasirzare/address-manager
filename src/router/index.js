@@ -1,7 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
+
+// views
 import HomeView from '../views/HomeView.vue';
 import AddAddress from '../views/AddAddress.vue';
 
+// routes
 const routes = [
   {
     path: '/',
@@ -15,6 +18,7 @@ const routes = [
   },
 ];
 
+// init
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
