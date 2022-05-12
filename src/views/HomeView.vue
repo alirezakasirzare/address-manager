@@ -2,11 +2,13 @@
   <div>
     <!-- title -->
     <h5 class="mb-4">لیست آدرس ها</h5>
-    <!-- address lists -->
+
+    <!-- loading -->
     <div v-if="lodingData">
       <LoadingSection />
     </div>
 
+    <!-- address lists -->
     <transition name="fade">
       <div
         class="row g-3 justify-content-center"
@@ -21,6 +23,7 @@
         </div>
       </div>
     </transition>
+
     <!-- not found item -->
     <dir class="p-0 pt-5" v-if="!itemsAddress.length && !lodingData">
       <ErrorPage
@@ -36,13 +39,11 @@
       :to="{ name: 'add' }"
       v-if="itemsAddress.length"
       class="btn btn-primary position-fixed rounded-circle corner-button"
-      data-bs-toggle="tooltip"
-      data-bs-placement="top"
-      title="اضافه کردن آدرس"
     >
       +
     </router-link>
 
+    <!-- modal -->
     <MoreInfoModal :current-item="currentItem" />
   </div>
 </template>
@@ -50,6 +51,7 @@
 <script setup>
 import { reactive, ref } from '@vue/reactivity';
 import axios from 'axios';
+
 // components
 import ErrorPage from '@/components/ErrorPage.vue';
 import AddressCard from '@/components/AddressCard.vue';
@@ -59,13 +61,6 @@ import MoreInfoModal from '@/components/MoreInfoModal.vue';
 // address items
 const itemsAddress = ref([]);
 const lodingData = ref(true);
-
-const currentItem = reactive({});
-
-const onMoreInfo = (event) => {
-  const modalId = Math.random();
-  Object.assign(currentItem, { ...event, modalId });
-};
 
 axios
   .get('https://stage.achareh.ir/api/karfarmas/address', {
@@ -80,6 +75,14 @@ axios
   .catch(() => {
     lodingData.value = false;
   });
+
+// more info
+const currentItem = reactive({});
+
+const onMoreInfo = (event) => {
+  const modalId = Math.random();
+  Object.assign(currentItem, { ...event, modalId });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -93,15 +96,5 @@ axios
   align-items: center;
   font-size: 20px;
   padding: 0 !important;
-}
-
-.list-enter-active,
-.list-leave-active {
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(50px);
 }
 </style>
