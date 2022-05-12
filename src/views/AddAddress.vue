@@ -286,8 +286,7 @@ onMounted(() => {
       }
 
       const regex = /[0-9]|\./;
-
-      if (!regex.test(key) && keyOfButton != 8) {
+      if (!regex.test(key) && ![8, 9, 37, 39].includes(keyOfButton)) {
         event.returnValue = false;
         if (event.preventDefault) event.preventDefault();
       }
