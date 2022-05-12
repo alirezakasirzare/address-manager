@@ -6,8 +6,11 @@ import router from './router';
 import 'bootstrap/dist/css/bootstrap.rtl.min.css';
 import 'bootstrap/dist/js/bootstrap';
 
-// custom
+// custom scc
 import './assets/style/main.scss';
 
 // app
-createApp(App).use(router).mount('#app');
+const app = createApp(App);
+app.use(router);
+
+app.mount('#app');

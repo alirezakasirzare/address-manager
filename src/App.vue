@@ -12,5 +12,6 @@
 </template>
 
 <script setup>
+// components
 import Navbar from './components/NavbarSection.vue';
 </script>
